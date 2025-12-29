@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aavash Bishwas | MERN Developer</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet" />
+
+    <style>
+      :root {
+        --primary: #2563eb;
+        --secondary: #38bdf8;
+        --bg: #e0f2fe; /* lighter background */
+        --text: #1e293b;
+        --card: #ffffff;
+        --glow: #38bdf8;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow-x: hidden;
+      }
+
+      nav {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 10;
+        background: rgba(224, 242, 254, 0.8);
+        backdrop-filter: blur(10px);
+      }
+      nav h2 {
+        color: var(--primary);
+      }
+      nav ul {
+        list-style: none;
+        display: flex;
+        gap: 20px;
+      }
+      nav ul a {
+        text-decoration: none;
+        color: var(--text);
+      }
+      .toggle {
+        background: var(--primary);
+        color: #fff;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+      }
+
+      /* Hero */
+      header {
+        position: relative;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        overflow: hidden;
+      }
+      header canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+      .hero-content img {
+        width: 240px;
+        height: 240px;
+        border-radius: 50%;
+        border: 5px solid var(--primary);
+        margin-bottom: 15px;
+        object-fit: cover;
+        animation: float 4s ease-in-out infinite;
+        box-shadow: 0 0 25px rgba(37, 99, 235, 0.6);
+      }
+      .hero-content h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        animation: glow 2s ease-in-out infinite alternate;
+      }
+      @keyframes glow {
+        0% {
+          text-shadow: 0 0 5px var(--glow), 0 0 10px var(--glow);
+        }
+        50% {
+          text-shadow: 0 0 20px var(--glow), 0 0 30px var(--glow);
+        }
+        100% {
+          text-shadow: 0 0 10px var(--glow), 0 0 20px var(--glow);
+        }
+      }
+      .typed-text {
+        color: var(--primary);
+        font-size: 1.5rem;
+        font-weight: 600;
+        height: 30px;
+        margin-bottom: 15px;
+        display: block;
+        transition: 0.3s;
+      }
+
+      /* Sections */
+      section {
+        padding: 100px 20px;
+        max-width: 1000px;
+        margin: auto;
+        opacity: 0;
+        transform: translateY(40px);
+        transition: 1s;
+      }
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      h2 {
+        color: var(--primary);
+        text-align: center;
+        margin-bottom: 50px;
+      }
+      .card {
+        background: var(--card);
+        padding: 20px;
+        border-radius: 15px;
+        margin: 10px;
+        transition: 0.3s;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+      .card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+      }
+
+      /* About Me Stylish */
+      #about p {
+        background: linear-gradient(
+          135deg,
+          rgba(56, 189, 248, 0.1),
+          rgba(37, 99, 235, 0.1)
+        );
+        padding: 25px;
+        border-radius: 15px;
+        font-size: 1.1rem;
+        line-height: 1.7;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        transition: 0.3s;
+      }
+      #about p:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Skills */
+      .skill-bar {
+        background: #cbd5e1;
+        border-radius: 10px;
+        height: 20px;
+        margin-bottom: 15px;
+        overflow: hidden;
+      }
+      .skill-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        text-align: right;
+        padding-right: 10px;
+        line-height: 20px;
+        color: white;
+        font-weight: 600;
+        transition: 1.5s ease;
+      }
+
+      button.submit {
+        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        color: #fff;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-15px);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <h2>Aavash Bishwas</h2>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="toggle" onclick="toggleMode()">Dark</button>
+    </nav>
+
+    <header>
+      <canvas id="fireworks"></canvas>
+      <div class="hero-content">
+        <img src="me.jpg" alt="Aavash Bishwas" />
+        <h1>Aavash Bishwas</h1>
+        <p>MERN Developer | BCA Student</p>
+        <span class="typed-text" id="typed"></span>
+        <a
+          href="https://github.com/Aavashbishwas301"
+          target="_blank"
+          style="color: var(--primary); margin: 5px; text-decoration: underline"
+          >GitHub</a
+        >
+        |
+        <a
+          href="https://www.linkedin.com/in/aavash-bishwas-9b5005244"
+          target="_blank"
+          style="color: var(--primary); margin: 5px; text-decoration: underline"
+          >LinkedIn</a
+        >
+      </div>
+    </header>
+
+    <section id="about">
+      <h2>About Me</h2>
+      <p>
+        Name: Aavash Bishwas<br />
+        Education: BCA from Himalaya Darshan College<br />
+        Address: Duhabi-2, Sunsari<br />
+        Email: bishwasaavash@gmail.com<br />
+        Phone: 9811095950<br />
+        I am passionate, hardworking, have good communication and
+        problem-solving skills.
+      </p>
+    </section>
+
+    <section id="skills">
+      <h2>Skills</h2>
+      <div class="skill">
+        HTML & CSS
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 90%">90%</div>
+        </div>
+      </div>
+      <div class="skill">
+        JavaScript
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 85%">85%</div>
+        </div>
+      </div>
+      <div class="skill">
+        React.js
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 80%">80%</div>
+        </div>
+      </div>
+      <div class="skill">
+        Node.js & Express
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 75%">75%</div>
+        </div>
+      </div>
+      <div class="skill">
+        MongoDB
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 70%">70%</div>
+        </div>
+      </div>
+      <div class="skill">
+        MySQL
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 70%">70%</div>
+        </div>
+      </div>
+      <div class="skill">
+        PHP
+        <div class="skill-bar">
+          <div class="skill-fill" style="width: 65%">65%</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="card">
+        <h3>Doctor Appointment System</h3>
+        <p>
+          Manages doctors, patients, and appointment scheduling efficiently.
+        </p>
+      </div>
+      <div class="card">
+        <h3>Student Fee Management System</h3>
+        <p>Handles student records, fee tracking, and payments.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Contact</h2>
+      <form onsubmit="sendMessage(event)">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea rows="4" placeholder="Your Message"></textarea>
+        <button class="submit">Send Message</button>
+      </form>
+      <p style="text-align: center; margin-top: 25px">
+        📍 Duhabi-2, Sunsari<br />
+        📧 bishwasaavash@gmail.com<br />
+        📞 9811095950
+      </p>
+    </section>
+
+    <footer>
+      <p>© <span id="year"></span> Aavash Bishwas</p>
+    </footer>
+
+    <script>
+      // Dark mode toggle
+      function toggleMode() {
+        document.body.classList.toggle("dark");
+      }
+
+      // Typed text animation
+      const typedText = [
+        "Passionate Developer",
+        "Hardworking",
+        "Problem Solver",
+        "MERN Stack Enthusiast",
+      ];
+      let typedIndex = 0,
+        charIndex = 0;
+      const typedEl = document.getElementById("typed");
+      function type() {
+        if (charIndex < typedText[typedIndex].length) {
+          typedEl.textContent += typedText[typedIndex][charIndex];
+          charIndex++;
+          setTimeout(type, 100);
+        } else {
+          setTimeout(erase, 2000);
+        }
+      }
+      function erase() {
+        if (charIndex > 0) {
+          typedEl.textContent = typedText[typedIndex].substring(
+            0,
+            charIndex - 1
+          );
+          charIndex--;
+          setTimeout(erase, 50);
+        } else {
+          typedIndex = (typedIndex + 1) % typedText.length;
+          setTimeout(type, 500);
+        }
+      }
+      type();
+
+      // Reveal sections on scroll
+      const sections = document.querySelectorAll("section");
+      window.addEventListener("scroll", () => {
+        sections.forEach((sec) => {
+          if (window.scrollY + window.innerHeight > sec.offsetTop + 100) {
+            sec.classList.add("visible");
+          }
+        });
+      });
+
+      // Fireworks animation
+      const canvas = document.getElementById("fireworks");
+      const ctx = canvas.getContext("2d");
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      let fireworks = [];
+      let particles = [];
+      class Firework {
+        constructor(x, y) {
+          this.x = canvas.width / 2;
+          this.y = canvas.height;
+          this.targetX = x;
+          this.targetY = y;
+          this.speed = 5;
+          this.angle = Math.atan2(y - canvas.height / 2, x - canvas.width / 2);
+        }
+        update() {
+          const dx = this.targetX - this.x,
+            dy = this.targetY - this.y;
+          this.x += dx * 0.08;
+          this.y += dy * 0.08;
+          if (Math.abs(dx) < 1 && Math.abs(dy) < 1) {
+            this.explode();
+            return true;
+          }
+          return false;
+        }
+        explode() {
+          for (let i = 0; i < 30; i++) {
+            particles.push(new Particle(this.targetX, this.targetY));
+          }
+        }
+      }
+      class Particle {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+          this.velX = (Math.random() - 0.5) * 5;
+          this.velY = (Math.random() - 0.5) * 5;
+          this.alpha = 1;
+          this.color = `hsl(${Math.random() * 360},100%,50%)`;
+        }
+        update() {
+          this.x += this.velX;
+          this.y += this.velY;
+          this.alpha -= 0.02;
+        }
+        draw() {
+          ctx.globalAlpha = this.alpha;
+          ctx.fillStyle = this.color;
+          ctx.fillRect(this.x, this.y, 3, 3);
+          ctx.globalAlpha = 1;
+        }
+      }
+      function loop() {
+        ctx.fillStyle = "rgba(224,242,254,0.2)";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        if (Math.random() < 0.03)
+          fireworks.push(
+            new Firework(
+              Math.random() * canvas.width,
+              (Math.random() * canvas.height) / 2
+            )
+          );
+        for (let i = fireworks.length - 1; i >= 0; i--) {
+          if (fireworks[i].update()) fireworks.splice(i, 1);
+        }
+        for (let i = particles.length - 1; i >= 0; i--) {
+          particles[i].update();
+          particles[i].draw();
+          if (particles[i].alpha <= 0) particles.splice(i, 1);
+        }
+        requestAnimationFrame(loop);
+      }
+      loop();
+
+      // Update year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      // Contact form
+      function sendMessage(e) {
+        e.preventDefault();
+        alert("Thank you! Your message has been sent 😊");
+      }
+    </script>
+  </body>
+</html>
